@@ -11,4 +11,4 @@ It was written in C ++ using smart pointers, a simple template-based object pool
 in general the good C ++ standards (at least the ones I know).
 I used the SDL library for rendering.
 
-There are a gameplay video on Youtube: https://youtu.be/_Fgp9DIq6dc
+There is a gameplay video on Youtube: https://youtu.be/_Fgp9DIq6dc
