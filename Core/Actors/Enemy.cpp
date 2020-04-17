@@ -9,8 +9,8 @@
 namespace DonkeyKong
 {
 	Enemy::Enemy(const Vec2 position) : GameObject(position, 49, 35, "Assets/donkey_kong_sheet.png"),
-		barrels_pool{ 10, Vec2{120, 90} }, barrel_already_launched{ false },
-		barrels_pile(std::make_unique<GameObject>(position + Vec2{ -25, 10 }, 36, 24, "Assets/barrels_pile.png")),
+		barrelsPool{ 10, Vec2{120, 90} }, barrelAlreadyLaunched{ false },
+		barrelsPileGameObj(std::make_unique<GameObject>(position + Vec2{ -25, 10 }, 36, 24, "Assets/barrels_pile.png")),
 		launchBarrelRange{ 0, 2, 3, 4, 5 }, nextLaunch{ 0 }, hasLose{false}, timeToSwitchFalling {1.5}
 	{
 		Tag = "Enemy";
@@ -50,14 +50,14 @@ namespace DonkeyKong
 			return;
 		}
 
-		barrels_active.erase(std::remove_if(barrels_active.begin(), barrels_active.end(),
+		barrelsLaunched.erase(std::remove_if(barrelsLaunched.begin(), barrelsLaunched.end(),
 			[](auto&& b) {
 			auto&& barrel = static_cast<Barrel&&>(*b);
 			return barrel.Position().y > Renderer::WindowHeight || barrel.IsBreakAnimFinished();
 		}),
-			barrels_active.end());
+			barrelsLaunched.end());
 
-		for (auto&& barrel : barrels_active)
+		for (auto&& barrel : barrelsLaunched)
 		{
 			barrel->Update(timer);
 		}
@@ -66,16 +66,16 @@ namespace DonkeyKong
 		{
 			if (!curr_animation->IsPlaying())
 			{
-				barrel_already_launched = false;
+				barrelAlreadyLaunched = false;
 				curr_animation = animations[AnimationName::idle];
 				curr_animation->Play(*sprite);
 			}
-			else if (curr_animation->CurrFrame() == 2 && !barrel_already_launched)
+			else if (curr_animation->CurrFrame() == 2 && !barrelAlreadyLaunched)
 			{
-				barrel_already_launched = true;
-				auto barrel = barrels_pool.GetObj();
+				barrelAlreadyLaunched = true;
+				auto barrel = barrelsPool.GetObj();
 				barrel->Roll(Vec2(120, 90), Vec2(100, 0));
-				barrels_active.push_back(std::move(barrel));
+				barrelsLaunched.push_back(std::move(barrel));
 			}
 		}
 		else
@@ -97,8 +97,8 @@ namespace DonkeyKong
 
 		if (!hasLose)
 		{
-			barrels_pile->Draw(rend);
-			for (auto&& barrel : barrels_active)
+			barrelsPileGameObj->Draw(rend);
+			for (auto&& barrel : barrelsLaunched)
 			{
 				barrel->Draw(rend);
 			}

@@ -18,11 +18,11 @@ namespace DonkeyKong
 	private:
 		enum class AnimationName { idle, help, love };
 
-		const float TIME_TO_RETURN_IDLE;
-		const std::array<float, 4> helpRange;
-		float nextHelp;
-		float returnToIdleTime;
 		std::unordered_map<AnimationName, std::shared_ptr<Animation>> animations;
+		float nextHelp;
+		float currTimeToIdle;
+		const std::array<float, 4> askingHelpRange;
+		const float timeToReturnIdle;
 	};
 }
 

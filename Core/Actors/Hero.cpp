@@ -11,9 +11,9 @@
 namespace DonkeyKong
 {
 	Hero::Hero(const Vec2& pos) : GameObject(pos, 20, 18, "assets/mario_sheet.png"),
-		speed{ 100, 100 }, climb_speed{ 30.0 }, 
-		isGrounded{ false }, isDead{ false }, canClimbFromDown{ false }, canClimbFromTop{ false }, isClimbing{false}, hasWon{false}, 
-		minYPosToDead { Renderer::WindowHeight - static_cast<int>(sprite->SpriteRect().h * 0.5) }
+		moveSpeed{ 100, 100 }, climbSpeed{ 30.0 }, 
+		isGrounded{ false }, isDead{ false }, canClimbFromDown{ false }, canClimbFromTop{ false }, hasWon{false}, 
+		maxYPosDie { Renderer::WindowHeight - static_cast<int>(sprite->SpriteRect().h * 0.5) }
 	{
 		Tag = "Hero";
 
@@ -48,7 +48,7 @@ namespace DonkeyKong
 
 	void Hero::Idle()
 	{
-		if (isGrounded && curr_anim_name != AnimationName::idle)
+		if (isGrounded && currAnimName != AnimationName::idle)
 		{
 			canClimbFromDown = canClimbFromTop = false;
 			velocity.x = velocity.y = 0;
@@ -60,11 +60,11 @@ namespace DonkeyKong
 	{
 		if (velocity.x >= 0)
 		{
-			velocity.x = -speed.x;
+			velocity.x = -moveSpeed.x;
 			sprite->FlipX(true);
 		}
 
-		if (isGrounded && curr_anim_name != AnimationName::run)
+		if (isGrounded && currAnimName != AnimationName::run)
 		{
 			SetCurrAnimation(AnimationName::run);
 		}
@@ -74,11 +74,11 @@ namespace DonkeyKong
 	{
 		if (velocity.x <= 0)
 		{
-			velocity.x = speed.x;
+			velocity.x = moveSpeed.x;
 			sprite->FlipX(false);
 		}
 
-		if (isGrounded && curr_anim_name != AnimationName::run)
+		if (isGrounded && currAnimName != AnimationName::run)
 		{
 			SetCurrAnimation(AnimationName::run);
 		}
@@ -90,7 +90,7 @@ namespace DonkeyKong
 		{
 			isGrounded = false;
 			physics_component->UseGravity = true;
-			velocity.y = -speed.y;
+			velocity.y = -moveSpeed.y;
 			SetCurrAnimation(AnimationName::jump);
 		}
 	}
@@ -99,10 +99,9 @@ namespace DonkeyKong
 	{
 		if (velocity.y >= 0)
 		{
-			isClimbing = true;
 			isGrounded = false;
 			physics_component->UseGravity = false;
-			velocity.y = -climb_speed;
+			velocity.y = -climbSpeed;
 			animations[AnimationName::climb]->SetReversed(false);
 			SetCurrAnimation(AnimationName::climb);
 		}
@@ -112,10 +111,9 @@ namespace DonkeyKong
 	{
 		if (velocity.y <= 0)
 		{
-			isClimbing = true;
 			isGrounded = false;
 			physics_component->UseGravity = false;
-			velocity.y = climb_speed;
+			velocity.y = climbSpeed;
 			animations[AnimationName::climb]->SetReversed(true);
 			SetCurrAnimation(AnimationName::climb);
 		}
@@ -123,11 +121,10 @@ namespace DonkeyKong
 
 	void Hero::ClimbIdle()
 	{
-		if (curr_anim_name == AnimationName::climb && curr_animation->IsPlaying())
+		if (currAnimName == AnimationName::climb && curr_animation->IsPlaying())
 		{
 			curr_animation->Pause();
 			velocity.y = 0;
-			isClimbing = true;
 		}
 	}
 
@@ -177,7 +174,7 @@ namespace DonkeyKong
 
 	void Hero::SetCurrAnimation(const AnimationName anim)
 	{
-		curr_anim_name = anim;
+		currAnimName = anim;
 		curr_animation = animations[anim];
 		curr_animation->Play(*sprite);
 	}

@@ -12,7 +12,7 @@ namespace DonkeyKong
 	}
 
 	Barrel::Barrel(const Vec2 position) : GameObject(position, 17, 14, "Assets/barrel.png"),
-		speed{ 0 }, isBreaked{ false }, rotationSpeedMultiplier {11}
+		moveSpeed{ 0 }, isBreaked{ false }, rotationSpeedMultiplier {11}
 	{
 		Tag = "Barrel";
 
@@ -29,7 +29,7 @@ namespace DonkeyKong
 		curr_animation = animations[AnimationName::roll];
 		curr_animation->Play(*sprite);
 
-		velocity = speed;
+		velocity = moveSpeed;
 	}
 
 	void Barrel::Update(const Timer& timer)
@@ -43,7 +43,7 @@ namespace DonkeyKong
 			physics_component->UseAirResistence = true;
 		}
 		else
-			velocity.x = copysignf(speed.x, velocity.x);
+			velocity.x = copysignf(moveSpeed.x, velocity.x);
 
 		isGrounded = false;
 	}
@@ -85,8 +85,8 @@ namespace DonkeyKong
 	void Barrel::Roll(const Vec2& newPos, const Vec2& newSpeed)
 	{
 		Position() = newPos;
-		speed = newSpeed;
-		velocity = speed;
+		moveSpeed = newSpeed;
+		velocity = moveSpeed;
 		isBreaked = false;
 		curr_animation = animations[AnimationName::roll];
 		curr_animation->Play(*sprite);

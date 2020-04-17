@@ -139,9 +139,9 @@ namespace DonkeyKong
 		if (hero.isDead)
 			return true;
 
-		if (hero.Position().y > hero.minYPosToDead)
+		if (hero.Position().y > hero.maxYPosDie)
 		{
-			hero.velocity.y = -hero.speed.y;
+			hero.velocity.y = -hero.moveSpeed.y;
 			hero.Die();
 			return true;
 		}

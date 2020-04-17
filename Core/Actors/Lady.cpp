@@ -4,7 +4,7 @@
 namespace DonkeyKong
 {
 	Lady::Lady(const Vec2& pos) : GameObject(pos, 16, 25, "Assets/peach.png"), 
-		helpRange{ 1, 4, 5, 7 }, nextHelp {1}, TIME_TO_RETURN_IDLE {2.5}, returnToIdleTime { TIME_TO_RETURN_IDLE }
+		askingHelpRange{ 1, 4, 5, 7 }, nextHelp {1}, timeToReturnIdle {2.5}, currTimeToIdle { timeToReturnIdle }
 	{
 		collider_ptr = std::make_shared<Collider>(*this, Rect{ (int) pos.x, (int) pos.y, 16, 25 });
 		collider_ptr->OffsetPos() = Vec2(8, 0);
@@ -24,13 +24,13 @@ namespace DonkeyKong
 
 		if (curr_animation->Name == static_cast<int>(AnimationName::help))
 		{
-			if (returnToIdleTime <= 0)
+			if (currTimeToIdle <= 0)
 			{
 				curr_animation = animations[AnimationName::idle];
 				curr_animation->Play(*sprite);
 			}
 			else
-				returnToIdleTime -= timer.DeltaTime();
+				currTimeToIdle -= timer.DeltaTime();
 		}
 		else 
 		{
@@ -38,8 +38,8 @@ namespace DonkeyKong
 			{
 				curr_animation = animations[AnimationName::help];
 				curr_animation->Play(*sprite);
-				returnToIdleTime = TIME_TO_RETURN_IDLE;
-				nextHelp = static_cast<float>(helpRange[rand() % helpRange.size()]);
+				currTimeToIdle = timeToReturnIdle;
+				nextHelp = static_cast<float>(askingHelpRange[rand() % askingHelpRange.size()]);
 			}
 			else
 				nextHelp -= timer.DeltaTime();

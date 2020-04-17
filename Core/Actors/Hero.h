@@ -34,7 +34,6 @@ namespace DonkeyKong
 		inline const bool& IsDead() const { return isDead; }
 		inline const bool& CanClimbFromTop() const { return canClimbFromTop; }
 		inline const bool& CanClimbFromDown() const { return canClimbFromDown; }
-		inline const bool& IsClimbing() const { return isClimbing; }
 		inline const bool& HasWon() const { return hasWon; }
 
 	private:
@@ -43,16 +42,15 @@ namespace DonkeyKong
 
 		std::shared_ptr<StateMachine> heroFSM;
 		std::unordered_map<AnimationName, std::shared_ptr<Animation>> animations;
-		AnimationName curr_anim_name;
-		const Vec2 speed;
-		const float climb_speed;
+		AnimationName currAnimName;
 		bool canClimbFromTop;
 		bool canClimbFromDown;
-		bool isClimbing;
 		bool isGrounded;
 		bool isDead;
 		bool hasWon;
-		const int minYPosToDead;
+		const Vec2 moveSpeed;
+		const float climbSpeed;
+		const int maxYPosDie;
 	};
 }
 

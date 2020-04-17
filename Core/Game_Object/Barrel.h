@@ -14,7 +14,7 @@ namespace DonkeyKong
 
 		void Update(const Timer&)  override;
 		void OnCollision(const Collider& other, const CollisionInfo info) override;
-		void Roll(const Vec2& pos, const Vec2& speed);
+		void Roll(const Vec2& pos, const Vec2& moveSpeed);
 
 		const bool& IsBreakAnimFinished() const;
 
@@ -23,7 +23,7 @@ namespace DonkeyKong
 
 		void Break();
 
-		Vec2 speed;
+		Vec2 moveSpeed;
 		std::unordered_map<AnimationName, std::shared_ptr<Animation>> animations;
 		bool isGrounded;
 		bool isBreaked;

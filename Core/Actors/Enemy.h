@@ -27,16 +27,16 @@ namespace DonkeyKong
 		void SetSurprisedAnim();
 		void SetFallAnim();
 
-		const std::array<float, 5> launchBarrelRange;
-		const std::unique_ptr<GameObject> barrels_pile;
-		float nextLaunch;
-		bool barrel_already_launched;
-		bool hasLose;
-		float timeToSwitchFalling;
-		ObjectPool<Barrel> barrels_pool;
-		std::vector<ObjectPool<Barrel>::ptr_type> barrels_active;
+		ObjectPool<Barrel> barrelsPool;
+		std::vector<ObjectPool<Barrel>::ptr_type> barrelsLaunched;
 		std::unordered_map<AnimationName, std::shared_ptr<Animation>> animations;
 		AnimationName currAnimationName;
+		float nextLaunch;
+		float timeToSwitchFalling;
+		bool barrelAlreadyLaunched;
+		bool hasLose;
+		const std::array<float, 5> launchBarrelRange;
+		const std::unique_ptr<GameObject> barrelsPileGameObj;
 	};
 }
 
