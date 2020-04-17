@@ -32,18 +32,17 @@ namespace DonkeyKong
 		float& Rotation();
 		inline const float& Rotation() const { return rotation; }
 
-		inline const FlipMode& GetFlipMode() const { return flip_mode; }
+		inline const FlipMode& GetFlipMode() const { return flipMode; }
 		inline const Pivot& GetPivot() const { return pivot; }
 
 	private:
-		bool is_active;
-		int scale_multiplier;
+		std::shared_ptr<Texture> texture;
 		Vec2 position;
 		float rotation;
+		int scaleMultiplier;
 		Rect spriteRect;
 		Rect texture_rect;
 		Pivot pivot;
-		FlipMode flip_mode;
-		std::shared_ptr<Texture> texture;
+		FlipMode flipMode;
 	};
 }

@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <unordered_map>
-#include "../Game_Object/GameObject.h"
+#include "../GameObject/GameObject.h"
 #include "Collider.h"
 
 namespace DonkeyKong

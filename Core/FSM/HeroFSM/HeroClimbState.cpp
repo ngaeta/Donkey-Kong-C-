@@ -1,5 +1,5 @@
 #include "HeroClimbState.h"
-#include "../../Game_Object/StaticGameObject.h"
+#include "../../GameObject/StaticGameObject.h"
 
 namespace DonkeyKong
 {

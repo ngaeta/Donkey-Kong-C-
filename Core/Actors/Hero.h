@@ -1,7 +1,7 @@
 #pragma once
 
 #include <unordered_map>
-#include "../Game_Object/GameObject.h"  
+#include "../GameObject/GameObject.h"  
 #include "../Utility/Vec2.h"
 #include "../FSM/StateMachine.h"
 

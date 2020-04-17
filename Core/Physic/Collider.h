@@ -2,7 +2,7 @@
 
 #include <memory>
 #include "../Utility/types.h"
-#include "../Game_Object/GameObject.h"
+#include "../GameObject/GameObject.h"
 #include "../Renderer/Renderer.h"
 
 namespace DonkeyKong

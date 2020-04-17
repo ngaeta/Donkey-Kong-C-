@@ -7,7 +7,7 @@
 namespace DonkeyKong
 {
 	Sprite::Sprite(const Vec2 pos, const int w, const int h, const std::string texture_fname) :
-        is_active{true}, scale_multiplier {1}, flip_mode{SDL_FLIP_NONE},
+        scaleMultiplier {1}, flipMode{SDL_FLIP_NONE},
 		position{ pos }, rotation{ 0 }, spriteRect{ (int)pos.x, (int)pos.y, w, h },
 		texture{ std::make_shared<Texture>(texture_fname) }, pivot{ w/2, h/2 }
 	{
@@ -23,7 +23,7 @@ namespace DonkeyKong
 
 	Rect Sprite::SpriteRect() const
 	{
-		return Rect{ (int) (position.x), int (position.y), spriteRect.w * scale_multiplier, spriteRect.h * scale_multiplier};
+		return Rect{ (int) (position.x), int (position.y), spriteRect.w * scaleMultiplier, spriteRect.h * scaleMultiplier};
 	}
 
 	void Sprite::SetSize(const int w, const int h)
@@ -49,12 +49,12 @@ namespace DonkeyKong
 
 	void Sprite::FlipX(const bool value)
 	{
-		flip_mode = value ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
+		flipMode = value ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
 	}
 
     void Sprite::ScaleMultiplier(int multiplier) 
     {
-        scale_multiplier = multiplier;
+        scaleMultiplier = multiplier;
         spriteRect.w *= multiplier;
         spriteRect.h *= multiplier;
     }

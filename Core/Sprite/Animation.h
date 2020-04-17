@@ -19,20 +19,20 @@ namespace DonkeyKong
 
 		void SetReversed(const bool is_reversed);
 		bool& Loop();
-		inline const bool& IsPlaying() const { return is_playing; }
-		inline const bool& IsReversed() const { return reverse; }
-		inline const int& CurrFrame() const { return curr_frame; }
+		inline const bool& IsPlaying() const { return isPlaying; }
+		inline const bool& IsReversed() const { return isReversed; }
+		inline const int& CurrFrame() const { return currFrame; }
 
 		int Name;
 
 	private:
-		int frames_count;
-		int delay_frames;
-		int curr_frame;
-		int next_frame_timer;
+		int framesCount;
+		int delayBetweenFrames;
+		int currFrame;
+		int nextFrameTimer;
 		bool loop;
-		bool is_playing;
-		bool reverse;
+		bool isPlaying;
+		bool isReversed;
 		Rect texture_rect;
 	};
 }

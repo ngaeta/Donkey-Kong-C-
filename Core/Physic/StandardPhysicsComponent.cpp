@@ -1,5 +1,5 @@
 #include "StandardPhysicsComponent.h"
-#include "../Game_Object/GameObject.h"
+#include "../GameObject/GameObject.h"
 #include "../Utility/Timer.h"
 #include <math.h>
 

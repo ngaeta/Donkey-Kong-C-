@@ -1,9 +1,9 @@
 #pragma once
 
 #include <unordered_map>
-#include "../Game_Object/GameObject.h"
+#include "../GameObject/GameObject.h"
 #include "../Pool/ObjectPool.h"
-#include "../Game_Object/Barrel.h"
+#include "../GameObject/Barrel.h"
 #include <array>
 #include <functional>
 

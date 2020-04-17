@@ -12,11 +12,12 @@ namespace DonkeyKong
 		Texture(const std::string file_name);
 		~Texture();
 
-		inline SDL_Texture* GetRawPointer() const { return texture_ptr; }
+		inline SDL_Texture* GetRawPointer() const { return textureRawPtr; }
 
 	private:
 		SDL_Texture* loadTexture(const std::string file_name) const;
-		SDL_Texture* texture_ptr;
+
+		SDL_Texture* textureRawPtr;
 	};
 }
 

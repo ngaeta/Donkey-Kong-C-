@@ -1,6 +1,6 @@
 #include "Scene.h"
-#include "../Game_Object/StaticGameObject.h"
-#include "../Game_Object/Ladder.h"
+#include "../GameObject/StaticGameObject.h"
+#include "../GameObject/Ladder.h"
 #include "../Actors/Enemy.h"
 #include "../Actors/Hero.h"
 #include "../Actors/Lady.h"

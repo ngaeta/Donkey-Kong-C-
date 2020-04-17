@@ -5,8 +5,8 @@
 #include "HeroClimbState.h"
 #include "HeroFallingState.h"
 #include "HeroDieState.h"
-#include "../../Game_Object/Ladder.h"
-#include "../../Game_Object/StaticGameObject.h"
+#include "../../GameObject/Ladder.h"
+#include "../../GameObject/StaticGameObject.h"
 #include "../../Actors/Lady.h"
 
 namespace DonkeyKong
@@ -117,7 +117,7 @@ namespace DonkeyKong
 			{
 				hero.isGrounded = true;
 				hero.velocity.y = 0;
-				hero.physics_component->UseGravity = false;
+				hero.physicsComponent->UseGravity = false;
 				hero.Position().y += -collisionInfo.Delta.y;;
 			}
 		}

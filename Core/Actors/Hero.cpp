@@ -3,8 +3,8 @@
 #include "../Sprite/Animation.h"
 #include "../Physic/Collider.h"
 #include "../Physic/StandardPhysicsComponent.h"
-#include "../Game_Object/StaticGameObject.h"
-#include "../Game_Object/Ladder.h"
+#include "../GameObject/StaticGameObject.h"
+#include "../GameObject/Ladder.h"
 #include "../FSM/HeroFSM/HeroFSM.h"
 #include <SDL.h>
 
@@ -19,9 +19,9 @@ namespace DonkeyKong
 
 		heroFSM = std::make_shared<HeroFSM>(*this);
 		Rect spriteRect = sprite->SpriteRect();
-		collider_ptr = std::make_shared<Collider>(*this, Rect{ spriteRect.x, spriteRect.y, spriteRect.w, spriteRect.h });
-		physics_component = std::make_unique<StandardPhysicsComponent>();
-		physics_component->UseGravity = false;
+		colliderPtr = std::make_shared<Collider>(*this, Rect{ spriteRect.x, spriteRect.y, spriteRect.w, spriteRect.h });
+		physicsComponent = std::make_unique<StandardPhysicsComponent>();
+		physicsComponent->UseGravity = false;
 
 		CreateAnimation(AnimationName::idle, 1, 100000, Rect{ 0, 0, 20, 18});
 		CreateAnimation(AnimationName::run, 2, 100, Rect{ 0, 0, 20, 18});
@@ -89,7 +89,7 @@ namespace DonkeyKong
 		if (isGrounded)
 		{
 			isGrounded = false;
-			physics_component->UseGravity = true;
+			physicsComponent->UseGravity = true;
 			velocity.y = -moveSpeed.y;
 			SetCurrAnimation(AnimationName::jump);
 		}
@@ -100,7 +100,7 @@ namespace DonkeyKong
 		if (velocity.y >= 0)
 		{
 			isGrounded = false;
-			physics_component->UseGravity = false;
+			physicsComponent->UseGravity = false;
 			velocity.y = -climbSpeed;
 			animations[AnimationName::climb]->SetReversed(false);
 			SetCurrAnimation(AnimationName::climb);
@@ -112,7 +112,7 @@ namespace DonkeyKong
 		if (velocity.y <= 0)
 		{
 			isGrounded = false;
-			physics_component->UseGravity = false;
+			physicsComponent->UseGravity = false;
 			velocity.y = climbSpeed;
 			animations[AnimationName::climb]->SetReversed(true);
 			SetCurrAnimation(AnimationName::climb);
@@ -121,9 +121,9 @@ namespace DonkeyKong
 
 	void Hero::ClimbIdle()
 	{
-		if (currAnimName == AnimationName::climb && curr_animation->IsPlaying())
+		if (currAnimName == AnimationName::climb && currAnim->IsPlaying())
 		{
-			curr_animation->Pause();
+			currAnim->Pause();
 			velocity.y = 0;
 		}
 	}
@@ -139,7 +139,7 @@ namespace DonkeyKong
 				velocity.y = 0;
 			}
 			else
-				physics_component->UseGravity = true;
+				physicsComponent->UseGravity = true;
 
 			isDead = true;
 			canClimbFromTop = canClimbFromDown = false;
@@ -151,7 +151,7 @@ namespace DonkeyKong
 	void Hero::SetFallAnim()
 	{
 		isGrounded = false;
-		physics_component->UseGravity = true;
+		physicsComponent->UseGravity = true;
 		SetCurrAnimation(AnimationName::jump);
 	}
 
@@ -175,7 +175,7 @@ namespace DonkeyKong
 	void Hero::SetCurrAnimation(const AnimationName anim)
 	{
 		currAnimName = anim;
-		curr_animation = animations[anim];
-		curr_animation->Play(*sprite);
+		currAnim = animations[anim];
+		currAnim->Play(*sprite);
 	}
 }

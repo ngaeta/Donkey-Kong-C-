@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <memory>
-#include "../Game_Object/GameObject.h"
+#include "../GameObject/GameObject.h"
 
 namespace DonkeyKong
 {

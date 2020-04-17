@@ -8,14 +8,14 @@
 
 namespace DonkeyKong
 {
-	Texture::Texture(const std::string file_name) : texture_ptr{nullptr}
+	Texture::Texture(const std::string file_name) : textureRawPtr{nullptr}
 	{
-		texture_ptr = loadTexture(file_name.c_str());
+		textureRawPtr = loadTexture(file_name.c_str());
 	}
 
 	Texture::~Texture()
 	{
-		SDL_DestroyTexture(texture_ptr);
+		SDL_DestroyTexture(textureRawPtr);
 	}
 
 	SDL_Texture * Texture::loadTexture(const std::string file_name) const

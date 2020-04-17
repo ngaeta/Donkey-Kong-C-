@@ -5,55 +5,55 @@ namespace DonkeyKong
 {
 	//It's work only on a spritesheet with sequences of horizontal images
 	Animation::Animation(const int frames, const int delayBetweenFrames, const Rect texture_rect_) :
-		frames_count{ frames }, delay_frames{ delayBetweenFrames },
+		framesCount{ frames }, delayBetweenFrames{ delayBetweenFrames },
 		loop{ true }, texture_rect{ texture_rect_ },
-		curr_frame{ -1 }, next_frame_timer{ 0 }, is_playing{ false }, reverse{ false }
+		currFrame{ -1 }, nextFrameTimer{ 0 }, isPlaying{ false }, isReversed{ false }
 	{
 	}
 
 	void Animation::Tick(Sprite& sprite)
 	{
 		uint32_t currentTime = SDL_GetTicks();
-		if (is_playing && static_cast<int>(currentTime) > next_frame_timer)
+		if (isPlaying && static_cast<int>(currentTime) > nextFrameTimer)
 		{
-			curr_frame += !reverse ? 1 : -1;
+			currFrame += !isReversed ? 1 : -1;
 
-			if (curr_frame == frames_count || curr_frame == -1)
+			if (currFrame == framesCount || currFrame == -1)
 			{
 				if (!loop)
 				{
-					is_playing = false;
+					isPlaying = false;
 					return;
 				}
 				else
 				{
-					curr_frame = !reverse ? 0 : frames_count - 1;
+					currFrame = !isReversed ? 0 : framesCount - 1;
 				}
 			}
 
-			sprite.TextureRect().x = curr_frame * sprite.TextureRect().w + texture_rect.x;
-			next_frame_timer = currentTime + delay_frames;
+			sprite.TextureRect().x = currFrame * sprite.TextureRect().w + texture_rect.x;
+			nextFrameTimer = currentTime + delayBetweenFrames;
 		}
 	}
 
 	void Animation::Play(Sprite& sprite)
 	{
-		is_playing = true;
-		curr_frame = reverse ? frames_count : -1;
-		next_frame_timer = 0;
+		isPlaying = true;
+		currFrame = isReversed ? framesCount : -1;
+		nextFrameTimer = 0;
 		sprite.TextureRect() = texture_rect;
 		sprite.SetSize(texture_rect.w, texture_rect.h);
 	}
 
 	void Animation::Pause()
 	{
-		is_playing = false;
+		isPlaying = false;
 	}
 
 	void Animation::SetReversed(const bool is_reversed)
 	{
-		this->reverse = is_reversed;
-		curr_frame = reverse ? frames_count : -1;
+		this->isReversed = is_reversed;
+		currFrame = isReversed ? framesCount : -1;
 	}
 
 	bool& Animation::Loop()

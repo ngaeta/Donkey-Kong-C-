@@ -1,5 +1,4 @@
 #include "Enemy.h"
-#include "../Game_Object/Barrel.h"
 #include "../Physic/Collider.h"
 #include <stdlib.h> 
 #include <time.h>
@@ -15,9 +14,9 @@ namespace DonkeyKong
 	{
 		Tag = "Enemy";
 
-		collider_ptr = std::make_shared<Collider>(*this, sprite->SpriteRect());
-		physics_component = std::make_unique<StandardPhysicsComponent>();
-		physics_component->UseGravity = false;
+		colliderPtr = std::make_shared<Collider>(*this, sprite->SpriteRect());
+		physicsComponent = std::make_unique<StandardPhysicsComponent>();
+		physicsComponent->UseGravity = false;
 
 		animations[AnimationName::idle] = std::make_shared<Animation>(3, 500, Rect{ 0, 35, 49, 35 });
 		animations[AnimationName::idle]->Name = static_cast<int>(AnimationName::idle);
@@ -27,8 +26,8 @@ namespace DonkeyKong
 		animations[AnimationName::surprised] = std::make_shared<Animation>(1, 400, Rect{ 0, 70, 49, 35 });
 		animations[AnimationName::headHitGround] = std::make_shared<Animation>(1, 400, Rect{ 0, 105, 49, 35 });
 
-		curr_animation = animations[AnimationName::idle];
-		curr_animation->Play(*sprite);
+		currAnim = animations[AnimationName::idle];
+		currAnim->Play(*sprite);
 
 		srand(time(NULL));
 		//nextLaunch = static_cast<float>(launchBarrelRange[rand() % launchBarrelRange.size()]);
@@ -62,15 +61,15 @@ namespace DonkeyKong
 			barrel->Update(timer);
 		}
 
-		if (curr_animation->Name == static_cast<int>(AnimationName::launchBarrel))
+		if (currAnim->Name == static_cast<int>(AnimationName::launchBarrel))
 		{
-			if (!curr_animation->IsPlaying())
+			if (!currAnim->IsPlaying())
 			{
 				barrelAlreadyLaunched = false;
-				curr_animation = animations[AnimationName::idle];
-				curr_animation->Play(*sprite);
+				currAnim = animations[AnimationName::idle];
+				currAnim->Play(*sprite);
 			}
-			else if (curr_animation->CurrFrame() == 2 && !barrelAlreadyLaunched)
+			else if (currAnim->CurrFrame() == 2 && !barrelAlreadyLaunched)
 			{
 				barrelAlreadyLaunched = true;
 				auto barrel = barrelsPool.GetObj();
@@ -82,8 +81,8 @@ namespace DonkeyKong
 		{
 			if (nextLaunch <= 0)
 			{
-				curr_animation = animations[AnimationName::launchBarrel];
-				curr_animation->Play(*sprite);
+				currAnim = animations[AnimationName::launchBarrel];
+				currAnim->Play(*sprite);
 				nextLaunch = static_cast<float>(launchBarrelRange[rand() % launchBarrelRange.size()]);
 			}
 			else
@@ -124,10 +123,10 @@ namespace DonkeyKong
 
 	void Enemy::SetSurprisedAnim()
 	{
-		if (curr_animation != animations[AnimationName::surprised])
+		if (currAnim != animations[AnimationName::surprised])
 		{
-			curr_animation = animations[AnimationName::surprised];
-			curr_animation->Play(*sprite);
+			currAnim = animations[AnimationName::surprised];
+			currAnim->Play(*sprite);
 		}
 	}
 
@@ -136,8 +135,8 @@ namespace DonkeyKong
 		if (velocity.y > 0)
 			return;
 
-		curr_animation = animations[AnimationName::headHitGround];
-		curr_animation->Play(*sprite);
-		physics_component->UseGravity = true;
+		currAnim = animations[AnimationName::headHitGround];
+		currAnim->Play(*sprite);
+		physicsComponent->UseGravity = true;
 	}
 }
