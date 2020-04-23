@@ -3,7 +3,6 @@
 
 namespace DonkeyKong
 {
-	//It's work only on a spritesheet with sequences of horizontal images
 	Animation::Animation(const int frames, const int delayBetweenFrames, const Rect texture_rect_) :
 		framesCount{ frames }, delayBetweenFrames{ delayBetweenFrames },
 		loop{ true }, texture_rect{ texture_rect_ },
@@ -11,9 +10,9 @@ namespace DonkeyKong
 	{
 	}
 
-	void Animation::Tick(Sprite& sprite)
+	void Animation::Tick(Sprite& sprite, const Timer& timer) 
 	{
-		uint32_t currentTime = SDL_GetTicks();
+		uint32_t currentTime = timer.Wall();
 		if (isPlaying && static_cast<int>(currentTime) > nextFrameTimer)
 		{
 			currFrame += !isReversed ? 1 : -1;

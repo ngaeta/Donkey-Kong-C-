@@ -3,6 +3,7 @@
 #include <string>
 #include <memory>
 #include "Sprite.h"
+#include "../Utility/Timer.h"
 
 namespace DonkeyKong
 {
@@ -13,7 +14,7 @@ namespace DonkeyKong
 		Animation(const int frames, const int delayBetweenFrames, const Rect texture_rect);
 		~Animation() = default;
 
-		void Tick(Sprite& sprite);
+		void Tick(Sprite& sprite, const Timer& timer);
 		void Play(Sprite& sprite);
 		void Pause();
 

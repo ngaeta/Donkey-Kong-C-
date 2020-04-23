@@ -28,7 +28,7 @@ namespace DonkeyKong
 
 		if (currAnim != nullptr)
 		{
-			currAnim->Tick(*sprite);
+			currAnim->Tick(*sprite, timer);
 		}
 	}
 

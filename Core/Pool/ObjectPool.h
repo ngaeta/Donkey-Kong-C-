@@ -31,7 +31,7 @@ namespace DonkeyKong
 			{
 				for (size_t i = 0; i < initial_size; i++)
 				{
-					poolQueue.emplace(std::make_unique<Object>());
+					poolQueue.emplace(std::make_unique<Object>());  //To modify, the method creates instances without forwarding 
 				}
 			}
 
