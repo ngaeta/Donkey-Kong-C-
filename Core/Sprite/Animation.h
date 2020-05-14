@@ -11,7 +11,7 @@ namespace DonkeyKong
 	{
 	public:
 		Animation() = delete;
-		Animation(const int frames, const int delayBetweenFrames, const Rect texture_rect);
+		Animation(const int frames, const float duration, const Rect texture_rect);
 		~Animation() = default;
 
 		void Tick(Sprite& sprite, const Timer& timer);
@@ -28,9 +28,10 @@ namespace DonkeyKong
 
 	private:
 		int framesCount;
-		int delayBetweenFrames;
 		int currFrame;
-		int nextFrameTimer;
+		float duration;
+		float frameSpeed;
+		float nextFrameTimer;
 		bool loop;
 		bool isPlaying;
 		bool isReversed;

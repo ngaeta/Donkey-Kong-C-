@@ -24,10 +24,10 @@ namespace DonkeyKong
 		physicsComponent->UseGravity = false;
 
 		CreateAnimation(AnimationName::idle, 1, 100000, Rect{ 0, 0, 20, 18});
-		CreateAnimation(AnimationName::run, 2, 100, Rect{ 0, 0, 20, 18});
+		CreateAnimation(AnimationName::run, 2, 0.2f, Rect{ 0, 0, 20, 18});
 		CreateAnimation(AnimationName::jump, 1, 100000, Rect{ 60, 0, 20, 18});
-		CreateAnimation(AnimationName::climb, 2, 200, Rect{ 0, 46, 19, 19});
-		CreateAnimation(AnimationName::die, 4, 250, Rect{ 0, 22, 23, 18, });
+		CreateAnimation(AnimationName::climb, 2, 0.4f, Rect{ 0, 46, 19, 19});
+		CreateAnimation(AnimationName::die, 4, 1.0f, Rect{ 0, 22, 23, 18, });
 		animations[AnimationName::die]->Loop() = false;
 
 		SetCurrAnimation(AnimationName::idle);
@@ -166,7 +166,7 @@ namespace DonkeyKong
 		}
 	}
 
-	void Hero::CreateAnimation(const AnimationName& name, const int& frames, const int& delay, const Rect& sheetRect)
+	void Hero::CreateAnimation(const AnimationName& name, const int frames, const float delay, const Rect& sheetRect)
 	{
 		animations[name] = std::make_shared<Animation>(frames, delay, sheetRect);
 		animations[name]->Name = static_cast<int>(name);

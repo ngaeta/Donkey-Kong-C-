@@ -11,9 +11,9 @@ namespace DonkeyKong
 
 		animations[AnimationName::idle] = std::make_shared<Animation>(1, 100, Rect{ 0, 0, 16, 25 });
 		animations[AnimationName::idle]->Name = static_cast<int>(AnimationName::idle);
-		animations[AnimationName::help] = std::make_shared<Animation>(2, 100, Rect{ 0, 30, 48, 25 });
+		animations[AnimationName::help] = std::make_shared<Animation>(2, 0.2f, Rect{ 0, 30, 48, 25 });
 		animations[AnimationName::help]->Name = static_cast<int>(AnimationName::help);
-		animations[AnimationName::love] = std::make_shared<Animation>(2, 400, Rect{ 0, 63, 33, 25 });
+		animations[AnimationName::love] = std::make_shared<Animation>(2, 0.8f, Rect{ 0, 63, 33, 25 });
 		currAnim = animations[AnimationName::idle];
 		currAnim->Play(*sprite);
 	}

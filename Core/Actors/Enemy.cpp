@@ -18,12 +18,12 @@ namespace DonkeyKong
 		physicsComponent = std::make_unique<StandardPhysicsComponent>();
 		physicsComponent->UseGravity = false;
 
-		animations[AnimationName::idle] = std::make_shared<Animation>(3, 500, Rect{ 0, 35, 49, 35 });
+		animations[AnimationName::idle] = std::make_shared<Animation>(3, 1.8f, Rect{ 0, 35, 49, 35 });
 		animations[AnimationName::idle]->Name = static_cast<int>(AnimationName::idle);
-		animations[AnimationName::launchBarrel] = std::make_shared<Animation>(3, 400, Rect{ 0, 0, 49, 35 });
+		animations[AnimationName::launchBarrel] = std::make_shared<Animation>(3, 1.5f, Rect{ 0, 0, 49, 35 });
 		animations[AnimationName::launchBarrel]->Name = static_cast<int>(AnimationName::launchBarrel);
 		animations[AnimationName::launchBarrel]->Loop() = false;
-		animations[AnimationName::surprised] = std::make_shared<Animation>(1, 400, Rect{ 0, 70, 49, 35 });
+		animations[AnimationName::surprised] = std::make_shared<Animation>(1, 100000, Rect{ 0, 70, 49, 35 });
 		animations[AnimationName::headHitGround] = std::make_shared<Animation>(1, 400, Rect{ 0, 105, 49, 35 });
 
 		currAnim = animations[AnimationName::idle];

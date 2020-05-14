@@ -37,7 +37,7 @@ namespace DonkeyKong
 		inline const bool& HasWon() const { return hasWon; }
 
 	private:
-		void CreateAnimation(const AnimationName& name, const int& frames, const int& delay, const Rect& sheetRect);
+		void CreateAnimation(const AnimationName& name, const int frames, const float delay, const Rect& sheetRect);
 		void SetCurrAnimation(const AnimationName anim);
 
 		std::shared_ptr<StateMachine> heroFSM;

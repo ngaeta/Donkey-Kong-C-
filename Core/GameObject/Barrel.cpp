@@ -22,7 +22,7 @@ namespace DonkeyKong
 
 		animations[AnimationName::idle] = std::make_shared<Animation>(1, 50000, Rect{ 0, 0, 17, 14 });
 		animations[AnimationName::roll] = std::make_shared<Animation>(1, 3000, Rect{ 0, 22, 16, 11 });
-		animations[AnimationName::breaked] = std::make_shared<Animation>(3, 130, Rect{ 0, 38, 21, 17 });
+		animations[AnimationName::breaked] = std::make_shared<Animation>(3, 0.5f, Rect{ 0, 38, 21, 17 });
 		animations[AnimationName::breaked]->Name = static_cast<int>(AnimationName::breaked);
 		animations[AnimationName::breaked]->Loop() = false;
 
