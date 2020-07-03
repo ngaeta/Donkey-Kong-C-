@@ -20,9 +20,9 @@ namespace DonkeyKong
 
 		void SetReversed(const bool is_reversed);
 		bool& Loop();
-		inline const bool& IsPlaying() const { return isPlaying; }
-		inline const bool& IsReversed() const { return isReversed; }
-		inline const int& CurrFrame() const { return currFrame; }
+		inline const bool IsPlaying() const { return isPlaying; }
+		inline const bool IsReversed() const { return isReversed; }
+		inline const int CurrFrame() const { return currFrame; }
 
 		int Name;
 
