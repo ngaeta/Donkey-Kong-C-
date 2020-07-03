@@ -29,12 +29,12 @@ namespace DonkeyKong
 		void SetFallAnim();
 		void Win();
 
-		inline const bool& IsGrounded() const { return isGrounded; }
+		inline const bool IsGrounded() const { return isGrounded; }
 		inline bool& IsGrounded() { return isGrounded; }
-		inline const bool& IsDead() const { return isDead; }
-		inline const bool& CanClimbFromTop() const { return canClimbFromTop; }
-		inline const bool& CanClimbFromDown() const { return canClimbFromDown; }
-		inline const bool& HasWon() const { return hasWon; }
+		inline const bool IsDead() const { return isDead; }
+		inline const bool CanClimbFromTop() const { return canClimbFromTop; }
+		inline const bool CanClimbFromDown() const { return canClimbFromDown; }
+		inline const bool HasWon() const { return hasWon; }
 
 	private:
 		void CreateAnimation(const AnimationName& name, const int frames, const float delay, const Rect& sheetRect);
