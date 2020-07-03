@@ -39,7 +39,7 @@ namespace DonkeyKong
 		Sprite& GetSprite();
 		float& Rotation();
 
-		inline const float& RotationSpeed() const { return rotationSpeed; }
+		inline const float RotationSpeed() const { return rotationSpeed; }
 		inline const Vec2& Velocity() const { return velocity; }
 		inline const Sprite& GetSprite() const { return *sprite; }
 
