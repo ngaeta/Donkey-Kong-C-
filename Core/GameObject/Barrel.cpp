@@ -92,7 +92,7 @@ namespace DonkeyKong
 		currAnim->Play(*sprite);
 	}
 
-	const bool& Barrel::IsBreakAnimFinished() const
+	const bool Barrel::IsBreakAnimFinished() const
 	{
 		return currAnim->Name == static_cast<int>(AnimationName::breaked) && !currAnim->IsPlaying();
 	}
