@@ -16,7 +16,7 @@ namespace DonkeyKong
 		void OnCollision(const Collider& other, const CollisionInfo info) override;
 		void Roll(const Vec2& pos, const Vec2& moveSpeed);
 
-		const bool& IsBreakAnimFinished() const;
+		const bool IsBreakAnimFinished() const;
 
 	private:
 		enum class AnimationName { idle, roll, breaked };
