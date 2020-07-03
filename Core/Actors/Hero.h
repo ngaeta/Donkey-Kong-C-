@@ -11,7 +11,7 @@ namespace DonkeyKong
 	{
 	public:
 		enum class AnimationName { idle, run, jump, climb, die };
-		friend class HeroFSMState;
+		friend class HeroFSMState;  //Friend class because the state machine is closely linked to Hero class. Only FSM has to set many hero's properties.
 
 		Hero(const Vec2& pos);
 		~Hero() = default;
