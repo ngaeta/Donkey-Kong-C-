@@ -30,7 +30,7 @@ namespace DonkeyKong
 
 		Vec2& Position();
 		float& Rotation();
-		inline const float& Rotation() const { return rotation; }
+		inline const float Rotation() const { return rotation; }
 
 		inline const FlipMode& GetFlipMode() const { return flipMode; }
 		inline const Pivot& GetPivot() const { return pivot; }
